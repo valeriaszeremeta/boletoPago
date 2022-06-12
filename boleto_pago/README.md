@@ -1,16 +1,28 @@
-# boleto_pago
+<p align="center" width="100%">
+    <img src="https://user-images.githubusercontent.com/69728774/173247595-58db7c81-5872-4d3b-a1a6-9118dbaa4872.png">
+</p>
+<h3 align="center">Aplicação desenvolvida na graduação de Análise e Desenvolvimento de Sistemas</h3>
+  
+  
+💻 Projeto<br>
 
-A new Flutter project.
+ BoletoPago é uma aplicação que serve para controlar os seus boletos
+  
+🚀 Tecnologias
+  
+<b>Esse projeto foi desenvolvido com as seguintes tecnologias:</b><br>
+ - Flutter
+ - Dart
+  
+📕 Bibliotecas
+  
+<b>Esse projeto utilizou das seguintes lib:</b><br>
 
-## Getting Started
+- google_ml_kit
+- firebase_core
+- google_fonts
+- shared_preferences
+- font_awesome_flutter
+- flutter_masked_text2
+- animated_card
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
