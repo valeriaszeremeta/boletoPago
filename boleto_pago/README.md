@@ -19,7 +19,6 @@
 <b>Esse projeto utilizou das seguintes lib:</b><br>
 
 - google_ml_kit
-- firebase_core
 - google_fonts
 - shared_preferences
 - font_awesome_flutter
