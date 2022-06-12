@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "934515207113",
+    "project_id": "boletopago-a16b0",
+    "storage_bucket": "boletopago-a16b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934515207113:android:5e48d11e90e750c440d618",
+        "android_client_info": {
+          "package_name": "com.example.boleto_pago"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934515207113-vhide6hehmb8q96a83dkjns5m1l3qs8d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.boleto_pago",
+            "certificate_hash": "46989fb8d95e4bd542075ec3f28296f9d26d4093"
+          }
+        },
+        {
+          "client_id": "934515207113-dbelearem8avkbp21f6jnlei55g9c94j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq0ALPssqL8kfQ333CYSFRBs-jZxESBZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934515207113-dbelearem8avkbp21f6jnlei55g9c94j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
