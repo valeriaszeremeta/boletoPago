@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class InsertBoletoController {
+class UpdateBoletoController {
   final formKey = GlobalKey<FormState>();
   BoletoModel model = BoletoModel();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -36,28 +36,26 @@ class InsertBoletoController {
         observacao: observacao);
   }
 
-  Future<void> saveBoleto() async {
-    this.uid = this._auth.currentUser!.uid;
-    firestore.collection("boletos").add({
-      "boletoId": "",
-      "userId": this.uid,
-      "name": model.name,
-      "dueDate": model.dueDate,
-      "value": model.value,
-      "barcode": model.barcode,
-      "observacao": model.observacao
-    }).then((value) async {
-      final shardRef = firestore.collection('boletos').doc(value.id);
-      await shardRef.update({'boletoId': value.id});
+  Future<void> updateBoleto(
+      {String? boletoId,
+      String? name,
+      String? dueDate,
+      String? value,
+      String? observacao}) async {
+    List<String> list = value!.split('\$');
+    String valueNew = list[1].replaceAll(',', '.');
+    double valueDouble = double.parse(valueNew);
+    final shardRef = firestore.collection('boletos').doc(boletoId);
+    await shardRef.update({
+      'name': name,
+      'dueDate': dueDate,
+      'value': valueDouble,
+      'observacao': observacao
     });
   }
 
-  bool cadastrarBoleto() {
-    final form = formKey.currentState;
-    if (form!.validate()) {
-      saveBoleto();
-      return true;
-    }
-    return false;
+  Future<void> deleteBoleto(String boletoId) async {
+    final shardRef = firestore.collection('boletos').doc(boletoId);
+    await shardRef.delete();
   }
 }

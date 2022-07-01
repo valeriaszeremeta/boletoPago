@@ -204,7 +204,7 @@ class _RegistrarUsuarioPageState extends State<RegistrarUsuarioPage> {
             labelSecondary: "Criar Conta",
             onTapSecondary: () {
               if (controller.cadastrarUsuario()) {
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, "/login");
               }
             },
           ),

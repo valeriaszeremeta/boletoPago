@@ -1,4 +1,7 @@
-import 'package:boleto_pago/modules/insert_boleto/insert_boleto_controller.dart';
+import 'dart:math';
+
+import 'package:boleto_pago/modules/insert_boleto/update_controller.dart';
+import 'package:boleto_pago/shared/models/boleto_model.dart';
 import 'package:boleto_pago/shared/themes/app_colors.dart';
 import 'package:boleto_pago/shared/themes/app_text_style.dart';
 import 'package:boleto_pago/shared/widgets/input_text/input_text_widget.dart';
@@ -7,30 +10,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class InsertBoletoPage extends StatefulWidget {
+class UpdateBoletoPage extends StatefulWidget {
   final String? barcode;
-  const InsertBoletoPage({
+  final BoletoModel boleto;
+  const UpdateBoletoPage({
     Key? key,
     this.barcode,
+    required this.boleto,
   }) : super(key: key);
 
   @override
-  _InsertBoletoPageState createState() => _InsertBoletoPageState();
+  _UpdateBoletoPageState createState() => _UpdateBoletoPageState();
 }
 
-class _InsertBoletoPageState extends State<InsertBoletoPage> {
-  final controller = InsertBoletoController();
+class _UpdateBoletoPageState extends State<UpdateBoletoPage> {
+  final controller = UpdateBoletoController();
   final formKey = GlobalKey<FormState>();
   final moneyInputTextController = MoneyMaskedTextController(
       leftSymbol: "R\$", initialValue: 0, decimalSeparator: ",");
   final dueDateInputTextController = MaskedTextController(mask: "00/00/0000");
-  final barcodeInputTextController = TextEditingController();
+  final name = TextEditingController();
+  final observacao = TextEditingController();
 
   @override
   void initState() {
-    if (widget.barcode != null) {
-      barcodeInputTextController.text = widget.barcode!;
-    }
+    name.text = widget.boleto.name!;
+    dueDateInputTextController.text = widget.boleto.dueDate!;
+    moneyInputTextController.text = widget.boleto.value.toString();
+    observacao.text = widget.boleto.observacao!;
     super.initState();
   }
 
@@ -67,6 +74,7 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
                 child: Column(
                   children: [
                     InputTextWidget(
+                      controller: name,
                       label: "Nome do Boleto",
                       icon: Icons.description_outlined,
                       validator: controller.validateName,
@@ -95,15 +103,7 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
                       },
                     ),
                     InputTextWidget(
-                      controller: barcodeInputTextController,
-                      label: "Código",
-                      icon: FontAwesomeIcons.barcode,
-                      validator: controller.validateCodigo,
-                      onChanged: (value) {
-                        controller.onChange(barcode: value);
-                      },
-                    ),
-                    InputTextWidget(
+                      controller: observacao,
                       label: "Observações",
                       icon: Icons.device_unknown_sharp,
                       onChanged: (value) {
@@ -127,15 +127,35 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
           ),
           SetLabelButtons(
             enableSecondaryColor: true,
-            labelPrimary: "Cancelar",
-            onTapPrimary: () {
-              Navigator.pop(context);
+            labelPrimary: "Deletar",
+            onTapPrimary: () async {
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: Text('Excluir Boleto'),
+                  content: Text('Tem certeza?'),
+                  actions: <Widget>[
+                    //elevatedButton
+                    ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text('Não')),
+                    ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: Text('Sim'))
+                  ],
+                ),
+              ).then((confirmed) async {
+                if (confirmed) {
+                  await controller.deleteBoleto(widget.boleto.boletoId!);
+                  Navigator.pop(context);
+                }
+              });
             },
-            labelSecondary: "Cadastrar",
+            labelSecondary: "Editar Boleto",
             onTapSecondary: () async {
-              if (controller.cadastrarBoleto()) {
-                Navigator.pop(context);
-              }
+              controller.updateBoleto(boletoId: widget.boleto.boletoId!, name: name.text, dueDate: dueDateInputTextController.text,
+               value: moneyInputTextController.text, observacao: observacao.text);
+              Navigator.pop(context);
             },
           ),
         ],

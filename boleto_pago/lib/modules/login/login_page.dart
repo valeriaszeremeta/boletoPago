@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: ButtonLogin(
                       onTap: () {
                         if (controller.login()) {
-                          Navigator.pop(context);
+                          Navigator.popAndPushNamed(context, "/home");
                         }
                       },
                     ),

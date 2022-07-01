@@ -1,3 +1,4 @@
+
 import 'package:boleto_pago/shared/auth/auth_controller.dart';
 import 'package:boleto_pago/shared/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -59,12 +60,6 @@ class LoginController {
       }
     }
   }
-
-  // _getUser() {
-  //   var usuario = authController.currentUser;
-  //   notifyListeners();
-  // }
-
   bool login() {
     final form = formKey.currentState;
     if (form!.validate()) {
@@ -80,8 +75,8 @@ class LoginController {
           await _googleSignIn.signIn();
       final user = UserModel(
         nome: googleSignInAccount!.displayName!,
-        photoURL: googleSignInAccount.photoUrl,
-        email: '',
+        photoURL: '',
+        email: googleSignInAccount.email,
         senha: '',
       );
       authController.setUser(context, user);

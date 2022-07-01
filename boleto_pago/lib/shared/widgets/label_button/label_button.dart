@@ -25,7 +25,7 @@ class LabelButton extends StatelessWidget {
       LabelButton(
         label: label,
         onPressed: onPressed,
-        style: TextStyles.buttonTitle,
+        style: TextStyles.buttonTitle2,
       );
 
   @override

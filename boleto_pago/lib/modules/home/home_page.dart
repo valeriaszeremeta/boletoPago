@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
                 child: IconButton(
                   icon: Icon(Icons.logout),
                   onPressed: () {
+                    controller.logout();
                     Navigator.pushReplacementNamed(context, "/login");
                   },
                 ),
@@ -81,7 +82,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-
           ],
         ),
       ),

@@ -35,7 +35,7 @@ class TextStyles {
   );
   static final homeSubtitle = GoogleFonts.roboto(
     fontSize: 14,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w400,
     color: AppColors.black,
   );
   static final scannerTitle = GoogleFonts.roboto(
@@ -57,6 +57,11 @@ class TextStyles {
     fontSize: 15,
     fontWeight: FontWeight.bold,
     color: AppColors.labelButton,
+  );
+    static final buttonTitle2 = GoogleFonts.roboto(
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
   );
   static final textLabelBold = GoogleFonts.roboto(
     fontSize: 16,
@@ -85,7 +90,7 @@ class TextStyles {
   );
   static final input = GoogleFonts.roboto(
     fontSize: 17,
-    fontWeight: FontWeight.w200,
+    fontWeight: FontWeight.w400,
     color: AppColors.input,
   );
   static final trailingBold = GoogleFonts.roboto(
@@ -95,7 +100,7 @@ class TextStyles {
   );
   static final trailingLight = GoogleFonts.roboto(
     fontSize: 14,
-    fontWeight: FontWeight.w200,
+    fontWeight: FontWeight.w400,
     color: AppColors.bold,
   );
   static final titleBoletos = GoogleFonts.roboto(
@@ -105,7 +110,7 @@ class TextStyles {
   );
   static final textLight = GoogleFonts.roboto(
     fontSize: 15,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w400,
     color: AppColors.textLight
   );
   static final textBold = GoogleFonts.roboto(

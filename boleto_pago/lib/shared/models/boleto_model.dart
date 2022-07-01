@@ -1,10 +1,7 @@
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-
-
 class BoletoModel {
+  final String? userid;
   final String? boletoId;
   final String? name;
   final String? dueDate;
@@ -12,6 +9,7 @@ class BoletoModel {
   final String? barcode;
   final String? observacao;
   BoletoModel({
+    this.userid,
     this.boletoId,
     this.name,
     this.dueDate,
@@ -19,8 +17,10 @@ class BoletoModel {
     this.barcode,
     this.observacao,
   });
+  
 
   BoletoModel copyWith({
+    String? userid,
     String? boletoId,
     String? name,
     String? dueDate,
@@ -29,6 +29,7 @@ class BoletoModel {
     String? observacao,
   }) {
     return BoletoModel(
+      userid: userid ?? this.userid,
       boletoId: boletoId ?? this.boletoId,
       name: name ?? this.name,
       dueDate: dueDate ?? this.dueDate,
@@ -38,17 +39,9 @@ class BoletoModel {
     );
   }
 
-  static BoletoModel fromJson(Map<String, dynamic> json) => BoletoModel(
-    boletoId: json['boletoId'],
-    name: json['name'],
-    dueDate: (json['dueDate'] ).toString(),
-    value: json['value']?.toDouble(),
-    barcode: json['barcode'],
-    observacao: json['observacao'],
-  );
-
   Map<String, dynamic> toMap() {
     return {
+      'userid': userid,
       'boletoId': boletoId,
       'name': name,
       'dueDate': dueDate,
@@ -60,22 +53,33 @@ class BoletoModel {
 
   factory BoletoModel.fromMap(Map<String, dynamic> map) {
     return BoletoModel(
+      userid: map['userid'],
       boletoId: map['boletoId'],
       name: map['name'],
-      dueDate: map['dueDate'].toString(),
+      dueDate: map['dueDate'],
       value: map['value']?.toDouble(),
       barcode: map['barcode'],
       observacao: map['observacao'],
     );
   }
 
+   static BoletoModel fromJson(Map<String, dynamic> json) => BoletoModel(
+        boletoId: json['boletoId'],
+        name: json['name'],
+        dueDate: (json['dueDate']).toString(),
+        value: json['value']?.toDouble(),
+        barcode: json['barcode'],
+        observacao: json['observacao'],
+      );
+
+
   String toJson() => json.encode(toMap());
 
-  //factory BoletoModel.fromJson(String source) => BoletoModel.fromMap(json.decode(source));
+ // factory BoletoModel.fromJson(String source) => BoletoModel.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'BoletoModel(boletoId: $boletoId, name: $name, dueDate: $dueDate, value: $value, barcode: $barcode, observacao: $observacao)';
+    return 'BoletoModel(userid: $userid, boletoId: $boletoId, name: $name, dueDate: $dueDate, value: $value, barcode: $barcode, observacao: $observacao)';
   }
 
   @override
@@ -83,6 +87,7 @@ class BoletoModel {
     if (identical(this, other)) return true;
   
     return other is BoletoModel &&
+      other.userid == userid &&
       other.boletoId == boletoId &&
       other.name == name &&
       other.dueDate == dueDate &&
@@ -93,7 +98,8 @@ class BoletoModel {
 
   @override
   int get hashCode {
-    return boletoId.hashCode ^
+    return userid.hashCode ^
+      boletoId.hashCode ^
       name.hashCode ^
       dueDate.hashCode ^
       value.hashCode ^

@@ -43,9 +43,7 @@ class RegistrarUsuarioController {
           .createUserWithEmailAndPassword(
               email: usuario.email, password: usuario.senha);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        throw AuthException('Senha Fraca');
-      } else if (e.code == 'email-already-in-use') {
+      if (e.code == 'email-already-in-use') {
         throw AuthException('O email já está sendo usado');
       }
     }
